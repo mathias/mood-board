@@ -7,8 +7,8 @@ class User < ActiveRecord::Base
 
   has_many :moods, inverse_of: :user, dependent: :delete_all
 
-  validates :email, format: { with: /\A[a-zA-Z\d._-]+@nordstrom.com\z/,
-    message: 'Email must be a valid nordstrom email address.'}
+  validates :email, format: { with: /\A[a-zA-Z\d._-]+@heroku.com\z/,
+                              message: 'Email must be a valid @heroku.com email address.'}
 
   after_create :create_first_mood
   scope :users_with_moods, -> { includes(:moods).where.not(moods: { id: nil }) }
