@@ -10,15 +10,10 @@ class User < ActiveRecord::Base
   validates :email, format: { with: /\A[a-zA-Z\d._-]+@heroku.com\z/,
                               message: 'Email must be a valid @heroku.com email address.'}
 
-  after_create :create_first_mood
-  scope :users_with_moods, -> { includes(:moods).where.not(moods: { id: nil }) }
+  has_one :latest_mood, class_name: Mood
 
   def image_url
     Gravatar.new(email).image_url
-  end
-
-  def current_mood
-    moods.order('created_at').last
   end
 
   def full_name

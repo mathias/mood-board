@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :moods, param: :slug, only: [:index]
 
   resources :users, except: :create, param: :slug do
-    resources :moods, only: [:show, :edit, :create]
+    resources :moods
   end
 
   root 'moods#index'

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Mood</title>
+  <title>Team Mood</title>
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -10,9 +10,10 @@
 <% flash.each do |name, msg| -%>
   <%= content_tag :div, content_tag(:strong, msg), class: 'alert alert-danger' %>
 <% end -%>
+
 <ul class="nav nav-tabs">
-  <li role="presentation"><%= link_to('Board', moods_path) %></li>
-  <li role="presentation" class="active"><%= link_to('Users', users_path) %></li>
+  <%= nav_link_with_active('Board', moods_path) %>
+  <%= nav_link_with_active('User', users_path) %>
   <% if user_signed_in? %>
     <li><%= link_to('Logout', destroy_user_session_path, :method => :delete) %></li>
   <% end %>

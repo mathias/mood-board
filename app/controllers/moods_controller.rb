@@ -1,9 +1,8 @@
 class MoodsController < ApplicationController
-  layout 'board', only: [:index]
-
   def index
-    @users = User.users_with_moods
-    @moods = @users.map { |user| user.current_mood }
+    @users = User.all
+    @moods = @users.map { |user| user.latest_mood }.
+      detect { |m| m != nil }
   end
 
   def show
@@ -14,16 +13,13 @@ class MoodsController < ApplicationController
   end
 
   def edit
-    @user = User.friendly.find(params[:user_slug])
-    @mood = @user.moods.find(params[:id])
+    @mood = current_user.moods.find(params[:id])
   end
 
   def create
-    user = User.friendly.find(params[:user_slug])
 
-    mood = user.moods.new
-    mood.left = params[:mood][:left]
-    mood.top = params[:mood][:top]
+    mood = current_user.moods.new
+    # TODO: record mood info
     mood.status = params[:status]
     mood.save!
 

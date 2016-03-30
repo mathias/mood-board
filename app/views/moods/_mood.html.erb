@@ -1,0 +1,11 @@
+
+  <%= image_tag(
+    mood.user.image_url,
+    style: "top:#{mood.top}px;left:#{mood.left}px",
+    alt: mood.user.full_name,
+    title: title(mood),
+    'data-content' => content(mood),
+    'data-trigger' => trigger(mood),
+    id: mood.user.slug,
+    class: "img-small img-rounded border #{mood.color}"
+  )%>
