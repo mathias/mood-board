@@ -21,6 +21,9 @@ group :development do
   gem 'pry'
   gem 'pry-rails'
   gem 'puma'
+  gem 'better_errors'
+  gem 'byebug'
+  gem 'binding_of_caller'
 end
 
 group :production do
